@@ -3,7 +3,6 @@
 [![Issues][issues-shield]][issues-url]
 [![MIT Licence][license-shield]][license-url]
 
-
 <!-- PROJECT LOGO -->
 <br />
 <samp>
@@ -22,8 +21,6 @@
   </p>
 </p>
 
-
-
 <!-- TABLE OF CONTENTS -->
 <details open="open">
   <summary>Table of Contents</summary>
@@ -40,8 +37,6 @@
   </ol>
 </details>
 
-
-
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
@@ -50,6 +45,7 @@
 This project was built to learn how to consume an API.
 
 The website is one page only:
+
 * **Content**: shows all news with data such as time, day, month, content and news source
 
 ### Built With
@@ -57,11 +53,12 @@ The website is one page only:
 Technologies used in the project.
 
 ### Web Frameworks
+
 * [Animate CSS](https://animate.style)
 
 ### API
-* [Google News API](https://newsapi.org/s/google-news-br-api)
 
+* [Google News API](https://newsapi.org/s/google-news-br-api)
 
 <!-- CONTRIBUTING -->
 ## Contributing
@@ -74,25 +71,20 @@ Contributions are what make the open source community such an amazing place to b
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-
 <!-- LICENSE -->
 ## License
 
 This work is licensed under a MIT License. See `LICENSE` for more information
 
-
 <!-- CONTACT -->
 ## Contact
 
-Silas Rodrigues - [@jinuye1](https://twitter.com/jinuye1) - silasrodrigues.fatec@gmail.com
+Silas Rodrigues - [@jinuye1](https://twitter.com/jinuye1) - <silasrodrigues.fatec@gmail.com>
 
 Project Link: [https://github.com/SilasRodrigues19/Google-News-API](https://github.com/SilasRodrigues19/Google-News-API)
 
-   
    <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/SilasRodrigues19/Google-News-API.svg?style=for-the-badge
-[contributors-url]: https://github.com/SilasRodrigues19/Google-News-API/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/SilasRodrigues19/Google-News-API.svg?style=for-the-badge
 [forks-url]: https://github.com/SilasRodrigues19/Google-News-API/network/members
 [stars-shield]: https://img.shields.io/github/stars/SilasRodrigues19/Google-News-API.svg?style=for-the-badge
@@ -105,4 +97,3 @@ Project Link: [https://github.com/SilasRodrigues19/Google-News-API](https://gith
 
 <br><hr>
 [🔼 Back to top](#Google-News-API)
-

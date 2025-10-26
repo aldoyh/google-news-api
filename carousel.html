@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D News Carousel</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #111;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        #canvas-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="canvas-container"></div>
+
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <!-- Main script will go here -->
+    <script>
+        // News data will be loaded here
+        let newsArticles = [];
+        let cardImages = [];
+        let rotationAngle = 0;
+        let autoPlaySpeed = 0.005;
+        let radius = 400;
+        let cardWidth = 300;
+        let cardHeight = 200;
+
+        // Load news data
+        function preload() {
+            loadJSON('fetch_news.php', (data) => {
+                newsArticles = data;
+                // Load images for each article
+                for (let article of newsArticles) {
+                    if (article.urlToImage) {
+                        cardImages.push(loadImage(article.urlToImage));
+                    } else {
+                        cardImages.push(null);
+                    }
+                }
+            });
+        }
+
+        function setup() {
+            let canvas = createCanvas(windowWidth, windowHeight, WEBGL);
+            canvas.parent('canvas-container');
+
+            // Lighting
+            ambientLight(60, 60, 60);
+            directionalLight(255, 255, 255, -1, 1, -1);
+
+            // Auto-update every 5 minutes
+            setInterval(() => {
+                loadJSON('fetch_news.php', (data) => {
+                    newsArticles = data;
+                    cardImages = [];
+                    for (let article of newsArticles) {
+                        if (article.urlToImage) {
+                            cardImages.push(loadImage(article.urlToImage));
+                        } else {
+                            cardImages.push(null);
+                        }
+                    }
+                });
+            }, 300000); // 5 minutes
+        }
+
+        function draw() {
+            background(17, 17, 17);
+
+            // Title
+            push();
+            translate(0, -height/2 + 50, 0);
+            fill(255);
+            textAlign(CENTER);
+            textSize(32);
+            text('Brazil Headlines 3D Carousel', 0, 0);
+            pop();
+
+            rotateY(rotationAngle);
+
+            if (newsArticles.length > 0) {
+                let angleStep = TWO_PI / newsArticles.length;
+                for (let i = 0; i < newsArticles.length; i++) {
+                    push();
+                    let angle = i * angleStep;
+                    let x = cos(angle) * radius;
+                    let z = sin(angle) * radius;
+                    translate(x, 0, z);
+                    rotateY(-angle); // Face the center
+
+                    // Draw card with shadow effect
+                    fill(255, 255, 255, 200);
+                    stroke(0);
+                    strokeWeight(2);
+                    rect(-cardWidth/2, -cardHeight/2, cardWidth, cardHeight, 10);
+
+                    // Draw image if available
+                    if (cardImages[i]) {
+                        image(cardImages[i], -cardWidth/2 + 10, -cardHeight/2 + 10, 80, 60);
+                    }
+
+                    // Draw text
+                    fill(0);
+                    textAlign(LEFT);
+                    textSize(16);
+                    text(newsArticles[i].title.substring(0, 50) + '...', -cardWidth/2 + 10, -cardHeight/2 + 90, cardWidth - 20, 50);
+                    textSize(12);
+                    text(newsArticles[i].description.substring(0, 100) + '...', -cardWidth/2 + 10, -cardHeight/2 + 140, cardWidth - 20, 60);
+
+                    pop();
+                }
+            }
+
+            rotationAngle += autoPlaySpeed;
+        }
+
+        function mouseDragged() {
+            let deltaX = mouseX - pmouseX;
+            rotationAngle += deltaX * 0.01;
+        }
+
+        function windowResized() {
+            resizeCanvas(windowWidth, windowHeight);
+        }
+    </script>
+</body>
+</html>
